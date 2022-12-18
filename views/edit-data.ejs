@@ -1,0 +1,34 @@
+<%- contentFor('content') %>
+<!-- jika key error yang muncul di browser ditunjukkan sebagai not defined -->
+<% if (typeof errors != 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+    <ul>
+        <!-- lakukan perulangan dengan foreach untuk mencetak error message -->
+        <% errors.forEach(err => { %>
+            <li>
+                <%= err.msg %> 
+            </li>
+            <% }) %>
+        </ul>
+    </div>  
+<% } %> 
+<form action="/contact/edit/<%= cont.name %> " method="post">
+    <!-- menggunakan ternary option untuk cek value dari oldName apakah menyimpan data yang sama dengan oldName atau -->
+    <input type="hidden" name="oldName" value="<%= (cont.oldName) ? cont.oldName : cont.name %>">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" id="name" required value="<%= cont.name %>">
+    </div>
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Phone</label>
+        <input type="tel" name="mobile" class="form-control" id="mobile" required value="<%= cont.mobile %>">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" value="<%= cont.email %>">
+    </div>
+    <div class="d-inline">
+        <button type="submit" class="btn btn-danger me-2">Ubah data</button>
+        <a href="/contact/<%= cont.name %>" class="btn btn-danger">Back to Detail</a>
+    </div>
+</form>

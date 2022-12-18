@@ -1,0 +1,21 @@
+  <!-- contentFor() digunakan untuk supaya bisa dipanggil value yang diisikan didalamnya ke bagian pecahan konten -->
+<%- contentFor('content') %>
+<h1>Detail contact</h1> 
+<!-- jika nama yang dikirimkan melalui parameter dengan menggunakan req.params tidak ada -->
+<div class="card w-50">
+<% if (cont === undefined) { %>
+  <!-- munculkan alert dibawah -->
+    <div class="alert alert-danger mb-auto" role="alert">
+      <%= url %> <p>tidak ditemukan</p>
+    </div> 
+  <% } else { %>  <!-- jika ada nama yang sama sesuai data json -->
+    <div class="card-body">
+      <h3 class="card-title">Name : <%= cont.name %></h3>
+      <h4 class="card-text">Mobile phone : <%= cont.mobile %></h4>
+      <h4 class="card-text">Email : <%= cont.email %></h4>
+      <a href="/contact" class="btn btn-danger">Back To Contact</a>
+      <a href="/contact/delete/<%= cont.name %>" onclick="return confirm('yakin mau hapus nama <%= cont.name %> ')" class="btn btn-danger d-inline">Hapus <%= cont.name %> dari dunia ? </a>
+      <a href="/contact/edit/<%= cont.name %> " class="btn btn-danger mt-2">Pembaharuan disini</a>
+    </div>
+  </div>
+<% } %>
